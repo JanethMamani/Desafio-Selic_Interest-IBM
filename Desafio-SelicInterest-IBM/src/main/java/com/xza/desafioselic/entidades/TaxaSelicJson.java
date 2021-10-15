@@ -4,11 +4,12 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
+@JsonIgnoreProperties
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"data", "valor"})
 @Generated("org.jsonschema2pojo")
@@ -19,6 +20,10 @@ public class TaxaSelicJson {
 	private Date data;
 	@JsonProperty("valor")
 	private Double taxa;
+	
+	public TaxaSelicJson() {
+		
+	}
 	
 	public TaxaSelicJson(Date data, Double taxa) {
 		
