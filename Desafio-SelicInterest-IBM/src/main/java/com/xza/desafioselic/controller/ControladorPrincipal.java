@@ -2,6 +2,7 @@ package com.xza.desafioselic.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ControladorPrincipal {
 		List<JSONObject> taxas = conector.criarListaJson();
 		Calendar paraMes = Calendar.getInstance();
 		
-		Object desconhecido = taxas.get(2);
+		taxas.stream().filter(item -> item.getDouble("valor") == anoConsultado).toString();
 		
 		return ResponseEntity.ok(anoConsultado);
 	}
