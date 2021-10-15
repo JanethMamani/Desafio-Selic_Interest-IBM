@@ -3,11 +3,15 @@ package com.xza.desafioselic.entidades;
 import java.util.Date;
 
 import javax.annotation.Generated;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+
+@Table
 
 @JsonIgnoreProperties
 @JsonInclude(JsonInclude.Include.NON_NULL)

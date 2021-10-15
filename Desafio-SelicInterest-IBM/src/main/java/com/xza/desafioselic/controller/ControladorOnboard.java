@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,8 +21,8 @@ public class ControladorOnboard {
 	@Autowired
 	private ServicoConversao servicoConversao;
 	
-	public List<TaxaSelicJson> criarListaJson() {
-		List<TaxaSelicJson> taxas = (List<TaxaSelicJson>) servicoConversao.parse(JSON_TAXA_URL);
+	public List<JSONObject> criarListaJson() {
+		List<JSONObject> taxas = (List<JSONObject>) servicoConversao.parse(JSON_TAXA_URL);
 		return taxas;
 	}
 	
