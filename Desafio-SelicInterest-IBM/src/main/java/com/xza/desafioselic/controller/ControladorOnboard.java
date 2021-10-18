@@ -1,10 +1,8 @@
 package com.xza.desafioselic.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,17 +19,14 @@ public class ControladorOnboard {
 	@Autowired
 	private ServicoConversao servicoConversao;
 	
-	public List<JSONObject> criarListaJson() {
-		List<JSONObject> taxas = (List<JSONObject>) servicoConversao.parse(JSON_TAXA_URL);
-		return taxas;
+	public TaxaSelic criarListaJson() {
+		TaxaSelic taxa =  servicoConversao.parse(JSON_TAXA_URL);
+		return taxa;
 	}
 	
 	public List<TaxaSelic> converterJson(List<TaxaSelicJson> listaP){
-		List<TaxaSelic> taxasConvertidas = new ArrayList<>();
-		for(TaxaSelicJson item : listaP) {
-			System.out.println(item.getData());
-		}
-		return taxasConvertidas;
+		
+		return null;
 	}
 
 }

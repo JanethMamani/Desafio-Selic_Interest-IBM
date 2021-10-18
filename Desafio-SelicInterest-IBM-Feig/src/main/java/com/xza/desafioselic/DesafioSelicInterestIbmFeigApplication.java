@@ -2,16 +2,12 @@ package com.xza.desafioselic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-
 
 @SpringBootApplication
-@EnableFeignClients
-public class DesafioSelicInterestIbmApplication {
+public class DesafioSelicInterestIbmFeigApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DesafioSelicInterestIbmApplication.class, args);
+		SpringApplication.run(DesafioSelicInterestIbmFeigApplication.class, args);
 	}
-	
-	
+
 }

@@ -1,9 +1,9 @@
 package com.xza.desafioselic.services;
 
-import com.xza.desafioselic.entidades.TaxaSelicJson;
+import com.xza.desafioselic.entidades.TaxaSelic;
 
 public interface ModeloConversor {
 	
-	Object parse(String url);
+	TaxaSelic parse(String url);
 
 }
