@@ -1,0 +1,25 @@
+package com.xza.desafioselic.servicos;
+
+import java.util.List;
+
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.xza.desafioselic.entidades.TaxaSelicJson;
+
+@Service
+public class TSConector {
+	
+	private RestTemplate restTemplate = new RestTemplate();
+	
+	public List<TaxaSelicJson> encontrarLista(){
+		ResponseEntity<List<TaxaSelicJson>> conexao = restTemplate.exchange("https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json",
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<TaxaSelicJson>>() {});
+		List<TaxaSelicJson> taxas = conexao.getBody();
+		return taxas;
+	}
+
+}

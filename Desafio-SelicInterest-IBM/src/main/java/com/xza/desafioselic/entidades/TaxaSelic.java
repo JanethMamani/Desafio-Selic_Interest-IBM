@@ -1,20 +1,11 @@
 package com.xza.desafioselic.entidades;
 
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-@JsonIgnoreProperties
 public class TaxaSelic {
 	
 	private Date data;
-	private Double taxa;
-	
-	public TaxaSelic(Date data, Double taxa) {
-		
-		this.data = data;
-		this.taxa = taxa;
-	}
+	private Double valor;
 	
 	public Date getData() {
 		return data;
@@ -22,11 +13,11 @@ public class TaxaSelic {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	public Double getTaxa() {
-		return taxa;
+	public Double getValor() {
+		return valor;
 	}
-	public void setTaxa(Double taxa) {
-		this.taxa = taxa;
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 	
 }

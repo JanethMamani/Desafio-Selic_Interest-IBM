@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xza.desafioselic.entidades.TaxaSelic;
+import com.xza.desafioselic.entidades.TaxaSelicJson;
 import com.xza.desafioselic.servicos.TSConector;
 
 @RestController
@@ -20,14 +20,14 @@ public class TSControladores {
 	TSConector conector = new TSConector();
 	
 	@GetMapping
-	public ResponseEntity<List<TaxaSelic>> todasTaxas(){
+	public ResponseEntity<List<TaxaSelicJson>> todasTaxas(){
 		return ResponseEntity.ok(conector.encontrarLista());
 	}
 	
 	@GetMapping(value = "/{anoConsultado}")
 	public ResponseEntity<Integer> filtrarPorAno(@PathVariable Integer anoConsultado){
-		List<TaxaSelic> taxas = conector.encontrarLista();
-		System.out.println(taxas.get(2));
+		List<TaxaSelicJson> taxas = conector.encontrarLista();
+		System.out.println(taxas.get(2).getData());
 		return ResponseEntity.ok(anoConsultado);
 	}
 
