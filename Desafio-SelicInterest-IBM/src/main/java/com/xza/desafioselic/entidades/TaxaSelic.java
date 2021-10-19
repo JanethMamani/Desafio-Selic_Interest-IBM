@@ -7,6 +7,12 @@ public class TaxaSelic {
 	private Date data;
 	private Double valor;
 	
+	public TaxaSelic(Date data, Double valor) {
+		
+		this.data = data;
+		this.valor = valor;
+	}
+	
 	public Date getData() {
 		return data;
 	}
