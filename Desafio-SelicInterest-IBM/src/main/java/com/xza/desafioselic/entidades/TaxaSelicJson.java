@@ -18,11 +18,4 @@ public class TaxaSelicJson {
 		this.valor = valor;
 	}
 	
-	@Override
-	public String toString() {
-		return "TaxaSelicJson :"
-				+ "data=" + data + ", valor=" + valor + ".";
-	}
-	
-	
 }

@@ -31,7 +31,7 @@ public class TSConector {
 		SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
 		List<TaxaSelic> taxas = new ArrayList<>();
 		for(TaxaSelicJson item : paraConverter) {
-			TaxaSelic taxa = new TaxaSelic( formatoData.parse(item.getData()), item.getValor());
+			TaxaSelic taxa = new TaxaSelic(formatoData.parse(item.getData()), item.getValor());
 			taxas.add(taxa);
 		}
 		return taxas;

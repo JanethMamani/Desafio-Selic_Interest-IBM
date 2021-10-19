@@ -1,6 +1,7 @@
 package com.xza.desafioselic.controllers;
 
 import java.text.ParseException;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xza.desafioselic.entidades.TaxaSelic;
-import com.xza.desafioselic.entidades.TaxaSelicJson;
 import com.xza.desafioselic.servicos.TSConector;
 
 @RestController
@@ -29,8 +29,10 @@ public class TSControladores {
 	@GetMapping(value = "/{anoConsultado}")
 	public ResponseEntity<Integer> filtrarPorAno(@PathVariable Integer anoConsultado) throws ParseException{
 		List<TaxaSelic> taxas = conector.criarLista();
-		System.out.println(taxas.get(2).getData());
-		return ResponseEntity.ok(anoConsultado);
+		GregorianCalendar paraMes = new GregorianCalendar();
+		paraMes.setGregorianChange(taxas.get(2).getData());;
+		
+		return ResponseEntity.ok(paraMes.YEAR);
 	}
 
 }
