@@ -1,7 +1,8 @@
 package com.xza.desafioselic.controllers;
 
 import java.text.ParseException;
-import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,17 @@ public class TSControladores {
 	}
 	
 	@GetMapping(value = "/{anoConsultado}")
-	public ResponseEntity<Integer> filtrarPorAno(@PathVariable Integer anoConsultado) throws ParseException{
+	public ResponseEntity<List<TaxaSelic>> filtrarPorAno(@PathVariable Integer anoConsultado) throws ParseException{
 		List<TaxaSelic> taxas = conector.criarLista();
-		GregorianCalendar paraMes = new GregorianCalendar();
-		paraMes.setGregorianChange(taxas.get(2).getData());;
+		SimpleDateFormat ano = new SimpleDateFormat("yyyy");
 		
-		return ResponseEntity.ok(paraMes.YEAR);
+		List<TaxaSelic> taxasPorMes = new ArrayList<>();
+		for (TaxaSelic taxa : taxas) {
+			if(Integer.parseInt(ano.format(taxa.getData())) == anoConsultado) {
+				taxasPorMes.add(taxa);
+			}
+		}
+		return ResponseEntity.ok(taxasPorMes);
 	}
 
 }
