@@ -30,8 +30,7 @@ public class TaxaSelic {
 
 	@Override
 	public String toString() {
-		
-		return "TaxaSelic [data=" + formatoData.format(data) + ", valor=" + valor + "]";
+		return "Data: " + formatoData.format(data) + " - " + "Valor = " + String.format("%.2f", valor) + "\n";
 	}
 	
 }

@@ -23,12 +23,12 @@ public class TSControladores {
 	TSConector conector = new TSConector();
 	
 	@GetMapping
-	public ResponseEntity<List<TaxaSelic>> todasTaxas() throws ParseException{
-		return ResponseEntity.ok(conector.criarLista());
+	public ResponseEntity<String> todasTaxas() throws ParseException{
+		return ResponseEntity.ok(conector.criarLista().toString());
 	}
 	
 	@GetMapping(value = "/{anoConsultado}")
-	public ResponseEntity<List<TaxaSelic>> filtrarPorAno(@PathVariable Integer anoConsultado) throws ParseException{
+	public ResponseEntity<String> filtrarPorAno(@PathVariable Integer anoConsultado) throws ParseException{
 		List<TaxaSelic> taxas = conector.criarLista();
 		SimpleDateFormat ano = new SimpleDateFormat("yyyy");
 		
@@ -38,7 +38,7 @@ public class TSControladores {
 				taxasPorMes.add(taxa);
 			}
 		}
-		return ResponseEntity.ok(taxasPorMes);
+		return ResponseEntity.ok(taxasPorMes.toString());
 	}
 
 }
