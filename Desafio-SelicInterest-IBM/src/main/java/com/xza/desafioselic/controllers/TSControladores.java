@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xza.desafioselic.entidades.TaxaSelic;
+import com.xza.desafioselic.servicos.ServicoTaxas;
 import com.xza.desafioselic.servicos.TSConector;
 
 @RestController
@@ -26,9 +28,11 @@ public class TSControladores {
 	@Autowired
 	TSConector conector = new TSConector();
 	
+	ServicoTaxas servicoT = new ServicoTaxas();
+	
 	@GetMapping
 	public ResponseEntity<String> todasTaxas() throws ParseException{
-		return ResponseEntity.ok(conector.criarLista().toString());
+		return ResponseEntity.ok(servicoT.findAll().toString());
 	}
 	
 	@GetMapping(value = "/{anoConsultado}")
@@ -45,7 +49,8 @@ public class TSControladores {
 	
 	@PostMapping(value = "/{data}/{valor}")
 	public ResponseEntity<String> inserirDado(@PathVariable String data, @PathVariable Double valor) throws ParseException{
-		TaxaSelic novaTaxa = new TaxaSelic(dataI.parse(data), valor);
+		Long id = (long) 101;
+		TaxaSelic novaTaxa = new TaxaSelic(id, dataI.parse(data), valor);
 		return ResponseEntity.ok(novaTaxa.toString());
 	}
 

@@ -5,14 +5,26 @@ import java.util.Date;
 
 public class TaxaSelic {
 	
+	private Long id;
+	
 	private Date data;
 	private Double valor;
 	
 	SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public TaxaSelic(Date data, Double valor) {
+	public TaxaSelic(Long id, Date data, Double valor) {
+		this.id = id;
 		this.data = data;
 		this.valor = valor;
+	}
+	
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public Date getData(){
