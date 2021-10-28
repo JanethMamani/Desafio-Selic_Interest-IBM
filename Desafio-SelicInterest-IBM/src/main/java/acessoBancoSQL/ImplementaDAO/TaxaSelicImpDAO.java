@@ -83,6 +83,9 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 		PreparedStatement pt = null;
 		try {
 			taxas = conector.criarLista(); 
+			pt = con.prepareStatement(
+					"DELETE FROM taxas WHERE Id > 0");
+			pt.executeUpdate();
 			for(TaxaSelic item : taxas) {
 				pt = con.prepareStatement(
 						"INSERT INTO taxas "
