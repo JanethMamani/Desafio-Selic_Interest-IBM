@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,6 +54,14 @@ public class TSControladores {
 		TaxaSelic novaTaxa = new TaxaSelic(id, dataI.parse(data), valor);
 		servicoT.inserir(novaTaxa);
 		taxas = servicoT.listar();
+		return ResponseEntity.ok(taxas.toString());
+	}
+	
+	@PutMapping(value = "/{id}/{data}/{valor}")
+	public ResponseEntity<String> atualizarDado(@PathVariable Integer id, @PathVariable String data, @PathVariable Double valor) throws ParseException{
+		TaxaSelic taxaAtualizar = new TaxaSelic(id, dataI.parse(data), valor);
+		servicoT.atualizar(taxaAtualizar);
+		List<TaxaSelic> taxas = servicoT.listar();
 		return ResponseEntity.ok(taxas.toString());
 	}
 

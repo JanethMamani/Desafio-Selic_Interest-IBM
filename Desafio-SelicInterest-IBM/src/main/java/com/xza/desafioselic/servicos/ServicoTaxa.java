@@ -22,5 +22,13 @@ public class ServicoTaxa {
 	public void inserir(TaxaSelic taxa) {
 		taxaDAO.inserir(taxa);
 	}
+	
+	public void atualizar(TaxaSelic taxa) {
+		taxaDAO.atualizar(taxa);
+	}
+	
+	public void deletarPorId(Integer id) {
+		taxaDAO.deletarPorId(id);
+	}
 
 }

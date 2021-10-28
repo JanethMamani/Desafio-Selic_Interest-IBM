@@ -65,12 +65,39 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 
 	@Override
 	public void atualizar(TaxaSelic taxa) {
-		
+		PreparedStatement pt = null;
+		try {
+			pt = con.prepareStatement(
+					"UPDATE taxas "
+					+ "SET Id = ?, Data = ?, Valor = ? "
+					+ "WHERE Id = ?");
+			
+			pt.setInt(1, taxa.getId());
+			pt.setDate(2, new java.sql.Date(taxa.getData().getTime()));
+			pt.setDouble(3, taxa.getValor());
+			pt.setInt(4, taxa.getId());
+			
+			pt.executeUpdate();
+		}catch(SQLException excep) {
+			throw new DBExcecao(excep.getMessage());
+		}finally {
+			DB.fecharStatement(pt);
+		}
 	}
 
 	@Override
 	public void deletarPorId(Integer id) {
-		
+		PreparedStatement pt = null;
+		try {
+			pt = con.prepareStatement("DELETE FROM taxas WHERE Id = ?");
+			
+			pt.setInt(1, id);
+			pt.executeUpdate();
+		}catch(SQLException excep) {
+			throw new DBExcecao(excep.getMessage());
+		}finally {
+			DB.fecharStatement(pt);
+		}
 	}
 	
 	private TaxaSelic instanciarTaxa(ResultSet rs) throws SQLException {
