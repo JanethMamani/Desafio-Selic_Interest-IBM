@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xza.desafioselic.entidades.TaxaSelic;
+import com.xza.desafioselic.servicos.ServicoTaxa;
 import com.xza.desafioselic.servicos.TSConector;
 
 @RestController
@@ -23,12 +24,14 @@ public class TSControladores {
 	SimpleDateFormat ano = new SimpleDateFormat("yyyy");
 	SimpleDateFormat dataI = new SimpleDateFormat("dd-MM-yyyy");
 	
+	ServicoTaxa servicoT = new ServicoTaxa();
+	
 	@Autowired
 	TSConector conector = new TSConector();
 	
 	@GetMapping
 	public ResponseEntity<String> todasTaxas() throws ParseException{
-		return ResponseEntity.ok(conector.criarLista().toString());
+		return ResponseEntity.ok(servicoT.atualizarTodos().toString());
 	}
 	
 	@GetMapping(value = "/{anoConsultado}")
@@ -45,12 +48,8 @@ public class TSControladores {
 	
 	@PostMapping(value = "/{data}/{valor}")
 	public ResponseEntity<String> inserirDado(@PathVariable String data, @PathVariable Double valor) throws ParseException{
-<<<<<<< HEAD
 		int id = 101;
 		TaxaSelic novaTaxa = new TaxaSelic(id, dataI.parse(data), valor);
-=======
-		TaxaSelic novaTaxa = new TaxaSelic(dataI.parse(data), valor);
->>>>>>> parent of d62068e (Acesso ao banco de dados)
 		return ResponseEntity.ok(novaTaxa.toString());
 	}
 

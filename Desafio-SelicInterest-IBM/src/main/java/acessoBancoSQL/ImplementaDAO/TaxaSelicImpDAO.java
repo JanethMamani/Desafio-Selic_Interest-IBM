@@ -72,13 +72,13 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 	}
 
 	@Override
-	public TaxaSelic encontrarPorId(Integer id) {
+	public List<TaxaSelic> encontrarTodos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
-	public List<TaxaSelic> encontrarTodos(){
+	public List<TaxaSelic> atualizarTodos(){
 		List<TaxaSelic> taxas = new ArrayList<>();
 		PreparedStatement pt = null;
 		try {
@@ -120,10 +120,5 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 		return taxas;
 	}
 
-	@Override
-	public List<TaxaSelic> encontrarPorTaxa(TaxaSelic taxa) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
