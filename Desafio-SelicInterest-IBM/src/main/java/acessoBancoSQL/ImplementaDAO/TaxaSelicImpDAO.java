@@ -63,23 +63,7 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 
 	@Override
 	public void atualizar(TaxaSelic taxa) {
-		PreparedStatement pt = null;
-		try {
-			pt = con.prepareStatement(
-					"UPDATE taxas "
-					+ "SET Data = ?, Valor = ? "
-					+ "WHERE Id = ?");
-			
-			pt.setDate(1, new java.sql.Date(taxa.getData().getTime()));
-			pt.setDouble(2, taxa.getValor());
-			pt.setInt(3, 0);
-			
-			pt.executeUpdate();
-		}catch(SQLException excep) {
-			throw new DBExcecao(excep.getMessage());
-		}finally {
-			DB.fecharStatement(pt);
-		}
+		
 	}
 
 	@Override
@@ -93,16 +77,10 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 		return null;
 	}
 	
-	private TaxaSelic instanciarTaxa(ResultSet rs) throws SQLException {
-		TaxaSelic taxa = new TaxaSelic(rs.getLong("Id"), rs.getDate("Data"), rs.getDouble("Valor"));
-		return taxa;
-	}
-
 	@Override
 	public List<TaxaSelic> encontrarTodos(){
 		List<TaxaSelic> taxas = new ArrayList<>();
 		PreparedStatement pt = null;
-		ResultSet rs = null;
 		try {
 			taxas = conector.criarLista(); 
 			for(TaxaSelic item : taxas) {
@@ -110,13 +88,27 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 						"INSERT INTO taxas "
 						+ "(Id, Data, Valor) "
 						+ "VALUES "
-						+ "(?, ?, ?)",
-						Statement.RETURN_GENERATED_KEYS);
+						+ "(?,?,?)"
+						,Statement.RETURN_GENERATED_KEYS);
 				
-				pt.setLong(1, item.getId());
+				pt.setInt(1, item.getId());
 				pt.setDate(2, new java.sql.Date(item.getData().getTime()));
 				pt.setDouble(3, item.getValor());
+				
+				int linhasAfetadas = pt.executeUpdate();
+				
+				if(linhasAfetadas>0) {
+					ResultSet rs = pt.getGeneratedKeys();
+					if(rs.next()) {
+						int id = rs.getInt(1);
+						item.setId(id);
+					}
+					DB.fecharResultSet(rs);
+				} else {
+					throw new DBExcecao("Erro inesperado. Nenhuma linha afetada!");
+				}
 			}
+				
 		}catch(ParseException troca){
 			troca.getMessage();
 		}
@@ -124,7 +116,6 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 			throw new DBExcecao(excep.getMessage());
 		}finally {
 			DB.fecharStatement(pt);
-			DB.fecharResultSet(rs);
 		}
 		return taxas;
 	}

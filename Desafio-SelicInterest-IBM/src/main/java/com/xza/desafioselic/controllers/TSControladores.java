@@ -49,7 +49,7 @@ public class TSControladores {
 	
 	@PostMapping(value = "/{data}/{valor}")
 	public ResponseEntity<String> inserirDado(@PathVariable String data, @PathVariable Double valor) throws ParseException{
-		Long id = (long) 101;
+		int id = 101;
 		TaxaSelic novaTaxa = new TaxaSelic(id, dataI.parse(data), valor);
 		return ResponseEntity.ok(novaTaxa.toString());
 	}

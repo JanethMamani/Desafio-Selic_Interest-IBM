@@ -5,25 +5,25 @@ import java.util.Date;
 
 public class TaxaSelic {
 	
-	private Long id;
+	private int id;
 	
 	private Date data;
 	private Double valor;
 	
 	SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public TaxaSelic(Long id, Date data, Double valor) {
+	public TaxaSelic(int id, Date data, Double valor) {
 		this.id = id;
 		this.data = data;
 		this.valor = valor;
 	}
 	
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -42,7 +42,7 @@ public class TaxaSelic {
 
 	@Override
 	public String toString() {
-		return "Data: " + formatoData.format(data) + " - " + "Valor = " + String.format("%.2f", valor) + "\n";
+		return id + " - " + "Data: " + formatoData.format(data) + " - " + "Valor = " + String.format("%.2f", valor) + "\n";
 	}
 	
 }
