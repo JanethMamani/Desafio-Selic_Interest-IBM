@@ -34,29 +34,31 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 		try {
 			pt = con.prepareStatement(
 					"INSERT INTO taxas "
-					+ "(Data, Valor) "
+					+ "(Id, Data, Valor) "
 					+ "VALUES "
-					+ "(?, ?)",
-					Statement.RETURN_GENERATED_KEYS);
-			
-			pt.setDate(1, new java.sql.Date(taxa.getData().getTime()));
-			pt.setDouble(2, taxa.getValor());
-			
+					+ "(?,?,?)"
+					,Statement.RETURN_GENERATED_KEYS);
+				
+			pt.setInt(1, taxa.getId());
+			pt.setDate(2, new java.sql.Date(taxa.getData().getTime()));
+			pt.setDouble(3, taxa.getValor());
+				
 			int linhasAfetadas = pt.executeUpdate();
-			
+				
 			if(linhasAfetadas>0) {
 				ResultSet rs = pt.getGeneratedKeys();
 				if(rs.next()) {
 					int id = rs.getInt(1);
-					//Taxa set id
+					taxa.setId(id);
 				}
 				DB.fecharResultSet(rs);
 			} else {
-				throw new DBExcecao("Erro inesperado");
+				throw new DBExcecao("Erro inesperado. Nenhuma linha afetada!");
 			}
-		} catch(SQLException excep) {
-			throw new DBExcecao("Erro inesperado! Nenhuma linha afetada!");
-		} finally {
+				
+		}catch(SQLException excep) {
+			throw new DBExcecao(excep.getMessage());
+		}finally {
 			DB.fecharStatement(pt);
 		}
 	}
@@ -70,11 +72,34 @@ public class TaxaSelicImpDAO implements TaxaDAO{
 	public void deletarPorId(Integer id) {
 		
 	}
+	
+	private TaxaSelic instanciarTaxa(ResultSet rs) throws SQLException {
+		TaxaSelic taxa = new TaxaSelic(rs.getInt("Id"),rs.getDate("Data"),rs.getDouble("Valor"));
+		return taxa;
+	}
 
 	@Override
 	public List<TaxaSelic> encontrarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pt = null;
+		ResultSet rs = null;
+		List<TaxaSelic> taxas = new ArrayList<>();
+		try {
+			pt = con.prepareStatement(
+					"SELECT * FROM taxas "
+					+ "ORDER BY Id");
+			rs = pt.executeQuery();
+			
+			while(rs.next()) {
+				TaxaSelic taxa = instanciarTaxa(rs);
+				taxas.add(taxa);
+			}
+		}catch(SQLException excep) {
+			throw new DBExcecao(excep.getMessage());
+		} finally {
+			DB.fecharStatement(pt);
+			DB.fecharResultSet(rs);
+		}
+		return taxas;
 	}
 	
 	@Override

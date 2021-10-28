@@ -14,5 +14,13 @@ public class ServicoTaxa {
 	public List<TaxaSelic> atualizarTodos(){
 		return taxaDAO.atualizarTodos();
 	}
+	
+	public List<TaxaSelic> listar(){
+		return taxaDAO.encontrarTodos();
+	}
+	
+	public void inserir(TaxaSelic taxa) {
+		taxaDAO.inserir(taxa);
+	}
 
 }

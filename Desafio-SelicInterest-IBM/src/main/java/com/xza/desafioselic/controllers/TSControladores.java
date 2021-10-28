@@ -36,7 +36,7 @@ public class TSControladores {
 	
 	@GetMapping(value = "/{anoConsultado}")
 	public ResponseEntity<String> filtrarPorAno(@PathVariable Integer anoConsultado) throws ParseException{
-		List<TaxaSelic> taxas = conector.criarLista();
+		List<TaxaSelic> taxas = servicoT.listar();
 		List<TaxaSelic> taxasPorMes = new ArrayList<>();
 		for (TaxaSelic taxa : taxas) {
 			if(Integer.parseInt(ano.format(taxa.getData())) == anoConsultado) {
@@ -48,9 +48,12 @@ public class TSControladores {
 	
 	@PostMapping(value = "/{data}/{valor}")
 	public ResponseEntity<String> inserirDado(@PathVariable String data, @PathVariable Double valor) throws ParseException{
-		int id = 101;
+		List<TaxaSelic> taxas = servicoT.listar();
+		int id = taxas.size() + 1;
 		TaxaSelic novaTaxa = new TaxaSelic(id, dataI.parse(data), valor);
-		return ResponseEntity.ok(novaTaxa.toString());
+		servicoT.inserir(novaTaxa);
+		taxas = servicoT.listar();
+		return ResponseEntity.ok(taxas.toString());
 	}
 
 }
