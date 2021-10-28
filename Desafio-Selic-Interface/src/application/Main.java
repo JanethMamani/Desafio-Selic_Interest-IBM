@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	
+	private static Scene scenePrincipal;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -17,13 +20,17 @@ public class Main extends Application {
 			container.setFitToHeight(true);
 			container.setFitToWidth(true);
 			
-			Scene scenePrincipal = new Scene(container);
+			scenePrincipal = new Scene(container);
 			primaryStage.setScene(scenePrincipal);
 			primaryStage.setTitle("Desafio aplicação consulta das Taxas SELIC");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static Scene getScenePrincipal() {
+		return scenePrincipal;
 	}
 	
 	public static void main(String[] args) {
