@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,13 @@ public class TSControladores {
 	public ResponseEntity<String> atualizarDado(@PathVariable Integer id, @PathVariable String data, @PathVariable Double valor) throws ParseException{
 		TaxaSelic taxaAtualizar = new TaxaSelic(id, dataI.parse(data), valor);
 		servicoT.atualizar(taxaAtualizar);
+		List<TaxaSelic> taxas = servicoT.listar();
+		return ResponseEntity.ok(taxas.toString());
+	}
+	
+	@DeleteMapping(value = "/delete/{id}")
+	public ResponseEntity<String> deletarDado(@PathVariable Integer id){
+		servicoT.deletarPorId(id);
 		List<TaxaSelic> taxas = servicoT.listar();
 		return ResponseEntity.ok(taxas.toString());
 	}
