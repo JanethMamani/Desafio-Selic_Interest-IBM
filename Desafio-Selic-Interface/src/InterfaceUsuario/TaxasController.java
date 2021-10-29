@@ -40,6 +40,13 @@ public class TaxasController implements Initializable{
 	
 	private ObservableList <TaxaSelic> obsLista;
 	
+	@FXML
+	public void onAtualizarAction() {
+		List<TaxaSelic> taxas = servicoT.listar();
+		obsLista = FXCollections.observableArrayList(taxas);
+		tabelaTaxas.setItems(obsLista);
+	}
+	
 	public void setServicoTaxa(ServicoTaxa servico) {
 		servicoT = servico;
 	}

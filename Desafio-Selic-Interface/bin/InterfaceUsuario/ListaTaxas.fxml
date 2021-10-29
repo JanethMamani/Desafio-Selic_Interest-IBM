@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="320.0" prefWidth="337.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="InterfaceUsuario.TaxasController">
+<VBox prefHeight="320.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceUsuario.TaxasController">
    <children>
       <Label prefHeight="0.0" prefWidth="204.0" text="Lista de Taxas SELIC">
          <padding>
@@ -22,7 +21,7 @@
       </Label>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button fx:id="atualizar" mnemonicParsing="false" text="Button" />
+          <Button fx:id="atualizar" mnemonicParsing="false" onAction="#onAtualizarAction" prefHeight="25.0" prefWidth="64.0" text="Atualizar" />
         </items>
       </ToolBar>
       <TableView fx:id="tabelaTaxas" prefHeight="200.0" prefWidth="200.0">
