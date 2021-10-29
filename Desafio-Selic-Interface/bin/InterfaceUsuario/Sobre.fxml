@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox prefHeight="277.0" prefWidth="409.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
+   <children>
+      <Label text="Sobre">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label prefHeight="224.0" prefWidth="402.0" text="Aplicativo para apresentar dados da Taxa SELIC armazenados no banco de dados." textAlignment="JUSTIFY" wrapText="true" />
+   </children>
+</VBox>

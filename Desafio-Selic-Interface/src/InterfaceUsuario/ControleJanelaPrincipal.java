@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
+import com.xza.desafioselic.servicos.ServicoTaxa;
+
 import InterfaceUsuario.Util.Alerts;
 import application.Main;
 import javafx.fxml.FXML;
@@ -27,11 +29,19 @@ public class ControleJanelaPrincipal implements Initializable{
 	
 	@FXML
 	public void onMenuItemTaxasAction() {
-		
+		carregarVisual("/InterfaceUsuario/ListaTaxas.fxml", (TaxasController controleT) ->{
+			controleT.setServicoTaxa(new ServicoTaxa());
+			controleT.atualizarTabela();
+		});
+	}
+	
+	@FXML
+	public void onMenuItemSobreAction() {
+		carregarVisual("/InterfaceUsuario/Sobre.fxml", x -> {});
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL uri, ResourceBundle rb) {
 		// TODO Auto-generated method stub
 		
 	}
